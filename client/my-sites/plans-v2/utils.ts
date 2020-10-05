@@ -70,11 +70,6 @@ import {
 	objectIsProduct,
 	PRODUCTS_LIST,
 } from 'lib/products-values/products-list';
-import { getJetpackProductDisplayName } from 'lib/products-values/get-jetpack-product-display-name';
-import { getJetpackProductTagline } from 'lib/products-values/get-jetpack-product-tagline';
-import { getJetpackProductCallToAction } from 'lib/products-values/get-jetpack-product-call-to-action';
-import { getJetpackProductDescription } from 'lib/products-values/get-jetpack-product-description';
-import { getJetpackProductShortName } from 'lib/products-values/get-jetpack-product-short-name';
 import { addQueryArgs } from 'lib/route';
 
 /**
@@ -122,10 +117,10 @@ export function durationToString( duration: Duration ): DurationString {
 	return duration === TERM_MONTHLY ? 'monthly' : 'annual';
 }
 
-export function durationToText( duration: Duration, translateFn: Function ): TranslateResult {
+export function durationToText( duration: Duration, translate: Function ): TranslateResult {
 	return duration === TERM_MONTHLY
-		? translateFn( 'per month, billed monthly' )
-		: translateFn( 'per month, billed yearly' );
+		? translate( 'per month, billed monthly' )
+		: translate( 'per month, billed yearly' );
 }
 
 /**
@@ -136,11 +131,11 @@ export function productButtonLabel(
 	product: SelectorProduct,
 	isOwned: boolean,
 	isUpgradeableToYearly: boolean,
-	translateFn: Function,
+	translate: Function,
 	currentPlan?: SitePlan | null
 ): TranslateResult {
 	if ( isUpgradeableToYearly ) {
-		return translateFn( 'Upgrade to Yearly' );
+		return translate( 'Upgrade to Yearly' );
 	}
 
 	if (
@@ -148,15 +143,15 @@ export function productButtonLabel(
 		( currentPlan && planHasFeature( currentPlan.product_slug, product.productSlug ) )
 	) {
 		return product.type !== ITEM_TYPE_PRODUCT
-			? translateFn( 'Manage Plan' )
-			: translateFn( 'Manage Subscription' );
+			? translate( 'Manage Plan' )
+			: translate( 'Manage Subscription' );
 	}
 
-	const { buttonLabel, displayName } = getSelectorProductCopy( product.productSlug, translateFn );
+	const { buttonLabel, displayName } = getSelectorProductCopy( product.productSlug, translate );
 
 	return (
 		buttonLabel ??
-		translateFn( 'Get {{name/}}', {
+		translate( 'Get {{name/}}', {
 			components: {
 				name: createElement( Fragment, {}, displayName ),
 			},
@@ -173,25 +168,25 @@ export function productBadgeLabel(
 	product: SelectorProduct,
 	isOwned: boolean,
 	highlight: boolean,
-	translateFn: Function,
+	translate: Function,
 	currentPlan?: SitePlan | null
 ): TranslateResult | undefined {
 	if ( isOwned ) {
 		return slugIsJetpackPlanSlug( product.productSlug )
-			? translateFn( 'Your plan' )
-			: translateFn( 'You own this' );
+			? translate( 'Your plan' )
+			: translate( 'You own this' );
 	}
 
 	if ( currentPlan && planHasFeature( currentPlan.product_slug, product.productSlug ) ) {
-		return translateFn( 'Included in your plan' );
+		return translate( 'Included in your plan' );
 	}
 
 	if ( highlight && slugIsFeaturedProduct( product.productSlug ) ) {
-		return translateFn( 'Best Value' );
+		return translate( 'Best Value' );
 	}
 }
 
-export function getMoreFeaturesLink( productSlug: string, translateFn: Function ) {
+export function getMoreFeaturesLink( productSlug: string, translate: Function ) {
 	switch ( productSlug ) {
 		case OPTIONS_JETPACK_SECURITY:
 		case OPTIONS_JETPACK_SECURITY_MONTHLY:
@@ -203,102 +198,102 @@ export function getMoreFeaturesLink( productSlug: string, translateFn: Function 
 		case PLAN_JETPACK_COMPLETE_MONTHLY:
 			return {
 				url: PLAN_COMPARISON_PAGE,
-				label: translateFn( 'See all features' ),
+				label: translate( 'See all features' ),
 			};
 		default:
 			return undefined;
 	}
 }
 
-export function getProductTypeOptions( translateFn: Function ) {
+export function getProductTypeOptions( translate: Function ) {
 	return {
 		[ SECURITY ]: {
 			id: SECURITY,
-			label: translateFn( 'Security' ),
+			label: translate( 'Security' ),
 		},
 		[ PERFORMANCE ]: {
 			id: PERFORMANCE,
-			label: translateFn( 'Performance' ),
+			label: translate( 'Performance' ),
 		},
 		[ ALL ]: {
 			id: ALL,
-			label: translateFn( 'All' ),
+			label: translate( 'All' ),
 		},
 	};
 }
 
 export function getSelectorProductCopy(
 	productSlug: string,
-	translateFn: Function
+	translate: Function
 ): SelectorProductCopy {
 	const securityCopy = {
-		displayName: translateFn( 'Jetpack Security' ),
-		shortName: translateFn( 'Security', {
+		displayName: translate( 'Jetpack Security' ),
+		shortName: translate( 'Security', {
 			comment: 'Short name of the Jetpack Security generic plan',
 		} ),
-		tagline: translateFn( 'Comprehensive WordPress protection' ),
-		description: translateFn(
+		tagline: translate( 'Comprehensive WordPress protection' ),
+		description: translate(
 			'Enjoy the peace of mind of complete site security. ' +
 				'Easy-to-use, powerful security tools guard your site, so you can focus on your business.'
 		),
 	};
 
 	const backupCopy = {
-		displayName: translateFn( 'Jetpack Backup' ),
-		shortName: translateFn( 'Backup', {
+		displayName: translate( 'Jetpack Backup' ),
+		shortName: translate( 'Backup', {
 			comment: 'Short name of the Jetpack Backup generic product',
 		} ),
-		tagline: translateFn( 'Recommended for all sites' ),
-		description: translateFn( 'Never lose a word, image, page, or time worrying about your site.' ),
-		buttonLabel: translateFn( 'Get Backup' ),
+		tagline: translate( 'Recommended for all sites' ),
+		description: translate( 'Never lose a word, image, page, or time worrying about your site.' ),
+		buttonLabel: translate( 'Get Backup' ),
 	};
 
 	const crmCopy = {
-		displayName: translateFn( 'Jetpack CRM' ),
-		shortName: translateFn( 'CRM', {
+		displayName: translate( 'Jetpack CRM' ),
+		shortName: translate( 'CRM', {
 			comment: 'Short name of the Jetpack CRM',
 		} ),
-		tagline: translateFn( 'Manage contacts effortlessly' ),
-		description: translateFn(
+		tagline: translate( 'Manage contacts effortlessly' ),
+		description: translate(
 			'The most simple and powerful WordPress CRM. Improve customer relationships and increase profits.'
 		),
-		buttonLabel: translateFn( 'Get CRM' ),
+		buttonLabel: translate( 'Get CRM' ),
 	};
 
 	const completeCopy = {
-		displayName: translateFn( 'Jetpack Complete' ),
-		shortName: translateFn( 'Complete', {
+		displayName: translate( 'Jetpack Complete' ),
+		shortName: translate( 'Complete', {
 			comment: 'Short name of Jetpack Complete',
 		} ),
-		tagline: translateFn( 'For best-in-class WordPress sites' ),
-		description: translateFn(
+		tagline: translate( 'For best-in-class WordPress sites' ),
+		description: translate(
 			'Superpower your site with everything Jetpack has to offer: real-time security, enhanced search, CRM, and marketing, growth, and design tools.'
 		),
-		buttonLabel: translateFn( 'Get Jetpack Complete' ),
+		buttonLabel: translate( 'Get Jetpack Complete' ),
 	};
 
 	const scanCopy = {
-		displayName: translateFn( 'Jetpack Scan' ),
-		shortName: translateFn( 'Scan', {
+		displayName: translate( 'Jetpack Scan' ),
+		shortName: translate( 'Scan', {
 			comment: 'Short name of Jetpack Scan',
 		} ),
-		tagline: translateFn( 'Protect your site' ),
-		description: translateFn(
+		tagline: translate( 'Protect your site' ),
+		description: translate(
 			'Automatic scanning and one-click fixes keep your site one step ahead of security threats.'
 		),
-		buttonLabel: translateFn( 'Get Scan' ),
+		buttonLabel: translate( 'Get Scan' ),
 	};
 
 	const antiSpamCopy = {
-		displayName: translateFn( 'Jetpack Anti-spam' ),
-		shortName: translateFn( 'Anti-spam', {
+		displayName: translate( 'Jetpack Anti-spam' ),
+		shortName: translate( 'Anti-spam', {
 			comment: 'Short name of Jetpack Anti-spam',
 		} ),
-		tagline: translateFn( 'Block spam automatically' ),
-		description: translateFn(
+		tagline: translate( 'Block spam automatically' ),
+		description: translate(
 			'Automated spam protection for comments and forms. Save time, get more responses, and give your visitors a better experience.'
 		),
-		buttonLabel: translateFn( 'Get Anti-spam' ),
+		buttonLabel: translate( 'Get Anti-spam' ),
 	};
 
 	switch ( productSlug ) {
@@ -738,23 +733,23 @@ export function getPathToUpsell(
  * Append "Available Options: Real-time and Daily" to the product description.
  *
  * @param product SelectorProduct
- * @param translateFn Function The translate function, ideally retrieved from useTranslate().
+ * @param translate Function The translate function, ideally retrieved from useTranslate().
  *
  * @returns ReactNode | TranslateResult
  */
 export const getJetpackDescriptionWithOptions = (
 	product: SelectorProduct,
-	translateFn: Function
+	translate: Function
 ): React.ReactNode | TranslateResult => {
 	const em = React.createElement( 'em', null, null );
 
-	const { description } = getSelectorProductCopy( product.productSlug, translateFn );
+	const { description } = getSelectorProductCopy( product.productSlug, translate );
 
 	// If the product has 'subtypes' (containing daily and real-time product slugs).
 	// then append "Available options: Real-time or Daily" to the product description.
 	return product.subtypes.some( ( subtype ) => DAILY_PRODUCTS.includes( subtype ) ) &&
 		product.subtypes.some( ( subtype ) => REALTIME_PRODUCTS.includes( subtype ) )
-		? translateFn( '%(productDescription)s {{em}}Available options: Real-time or Daily.{{/em}}', {
+		? translate( '%(productDescription)s {{em}}Available options: Real-time or Daily.{{/em}}', {
 				args: {
 					productDescription: description,
 				},
