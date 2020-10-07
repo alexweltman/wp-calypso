@@ -227,18 +227,18 @@ export function getSelectorProductCopy(
 	translate: Function
 ): SelectorProductCopy {
 	switch ( productSlug ) {
-		case OPTIONS_JETPACK_SECURITY:
-		case OPTIONS_JETPACK_SECURITY_MONTHLY:
+		case PRODUCT_JETPACK_ANTI_SPAM:
+		case PRODUCT_JETPACK_ANTI_SPAM_MONTHLY:
 			return {
-				displayName: translate( 'Jetpack Security' ),
-				shortName: translate( 'Security', {
-					comment: 'Short name of the Jetpack Security generic plan',
+				displayName: translate( 'Jetpack Anti-spam' ),
+				shortName: translate( 'Anti-spam', {
+					comment: 'Short name of Jetpack Anti-spam',
 				} ),
-				tagline: translate( 'Comprehensive WordPress protection' ),
+				tagline: translate( 'Block spam automatically' ),
 				description: translate(
-					'Enjoy the peace of mind of complete site security. ' +
-						'Easy-to-use, powerful security tools guard your site, so you can focus on your business.'
+					'Automated spam protection for comments and forms. Save time, get more responses, and give your visitors a better experience.'
 				),
+				buttonLabel: translate( 'Get Anti-spam' ),
 			};
 		case OPTIONS_JETPACK_BACKUP:
 		case OPTIONS_JETPACK_BACKUP_MONTHLY:
@@ -253,19 +253,6 @@ export function getSelectorProductCopy(
 				),
 				buttonLabel: translate( 'Get Backup' ),
 			};
-		case PRODUCT_JETPACK_CRM:
-		case PRODUCT_JETPACK_CRM_MONTHLY:
-			return {
-				displayName: translate( 'Jetpack CRM' ),
-				shortName: translate( 'CRM', {
-					comment: 'Short name of the Jetpack CRM',
-				} ),
-				tagline: translate( 'Manage contacts effortlessly' ),
-				description: translate(
-					'The most simple and powerful WordPress CRM. Improve customer relationships and increase profits.'
-				),
-				buttonLabel: translate( 'Get CRM' ),
-			};
 		case PLAN_JETPACK_COMPLETE:
 		case PLAN_JETPACK_COMPLETE_MONTHLY:
 			return {
@@ -278,6 +265,19 @@ export function getSelectorProductCopy(
 					'Superpower your site with everything Jetpack has to offer: real-time security, enhanced search, CRM, and marketing, growth, and design tools.'
 				),
 				buttonLabel: translate( 'Get Jetpack Complete' ),
+			};
+		case PRODUCT_JETPACK_CRM:
+		case PRODUCT_JETPACK_CRM_MONTHLY:
+			return {
+				displayName: translate( 'Jetpack CRM' ),
+				shortName: translate( 'CRM', {
+					comment: 'Short name of the Jetpack CRM',
+				} ),
+				tagline: translate( 'Manage contacts effortlessly' ),
+				description: translate(
+					'The most simple and powerful WordPress CRM. Improve customer relationships and increase profits.'
+				),
+				buttonLabel: translate( 'Get CRM' ),
 			};
 		case PRODUCT_JETPACK_SCAN:
 		case PRODUCT_JETPACK_SCAN_MONTHLY:
@@ -292,18 +292,18 @@ export function getSelectorProductCopy(
 				),
 				buttonLabel: translate( 'Get Scan' ),
 			};
-		case PRODUCT_JETPACK_ANTI_SPAM:
-		case PRODUCT_JETPACK_ANTI_SPAM_MONTHLY:
+		case OPTIONS_JETPACK_SECURITY:
+		case OPTIONS_JETPACK_SECURITY_MONTHLY:
 			return {
-				displayName: translate( 'Jetpack Anti-spam' ),
-				shortName: translate( 'Anti-spam', {
-					comment: 'Short name of Jetpack Anti-spam',
+				displayName: translate( 'Jetpack Security' ),
+				shortName: translate( 'Security', {
+					comment: 'Short name of the Jetpack Security generic plan',
 				} ),
-				tagline: translate( 'Block spam automatically' ),
+				tagline: translate( 'Comprehensive WordPress protection' ),
 				description: translate(
-					'Automated spam protection for comments and forms. Save time, get more responses, and give your visitors a better experience.'
+					'Enjoy the peace of mind of complete site security. ' +
+						'Easy-to-use, powerful security tools guard your site, so you can focus on your business.'
 				),
-				buttonLabel: translate( 'Get Anti-spam' ),
 			};
 		default:
 			throw `Unknown SelectorProductSlug: ${ productSlug }`;
