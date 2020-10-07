@@ -25,10 +25,10 @@ import {
 	getPathToSelector,
 	getPathToUpsell,
 	getPathToDetails,
-	getSelectorProductCopy,
 	checkout,
 } from './utils';
 import QueryProducts from './query-products';
+import { getSelectorProductCopy } from './translated-copy';
 import useIsLoading from './use-is-loading';
 import useHasProductUpsell from './use-has-product-upsell';
 import ProductCardPlaceholder from 'components/jetpack/card/product-card-placeholder';

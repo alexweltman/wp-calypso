@@ -33,9 +33,9 @@ import {
 	getProductUpsell,
 	getPathToSelector,
 	getPathToDetails,
-	getSelectorProductCopy,
 	slugToSelectorProduct,
 } from './utils';
+import { getSelectorProductCopy } from './translated-copy';
 import withRedirectToSelector from './with-redirect-to-selector';
 
 /**

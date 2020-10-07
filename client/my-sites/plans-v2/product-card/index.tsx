@@ -19,13 +19,13 @@ import {
 	durationToText,
 	getMoreFeaturesLink,
 	getRealtimeFromDaily,
-	getSelectorProductCopy,
 	isUpgradeable,
 	productBadgeLabel,
 	productButtonLabel,
 	slugToSelectorProduct,
 	slugIsFeaturedProduct,
 } from '../utils';
+import { getSelectorProductCopy } from '../translated-copy';
 import PlanRenewalMessage from '../plan-renewal-message';
 import useItemPrice from '../use-item-price';
 import { getSitePurchases } from 'state/purchases/selectors';
