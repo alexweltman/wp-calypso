@@ -31,6 +31,10 @@ import {
 	PRODUCT_JETPACK_CRM_MONTHLY,
 	PRODUCT_JETPACK_SCAN,
 	PRODUCT_JETPACK_SCAN_MONTHLY,
+	PRODUCT_JETPACK_SEARCH,
+	PRODUCT_JETPACK_SEARCH_MONTHLY,
+	PRODUCT_WPCOM_SEARCH,
+	PRODUCT_WPCOM_SEARCH_MONTHLY,
 } from 'lib/products-values/constants';
 
 /**
@@ -155,6 +159,21 @@ export function getSelectorProductCopy(
 					'Automatic scanning and one-click fixes keep your site one step ahead of security threats.'
 				),
 				buttonLabel: translate( 'Get Scan' ),
+			};
+		case PRODUCT_JETPACK_SEARCH:
+		case PRODUCT_JETPACK_SEARCH_MONTHLY:
+		case PRODUCT_WPCOM_SEARCH:
+		case PRODUCT_WPCOM_SEARCH_MONTHLY:
+			return {
+				displayName: translate( 'Jetpack Search' ),
+				shortName: translate( 'Search', {
+					comment: 'Short name of Jetpack Search',
+				} ),
+				tagline: translate( 'Recommended for sites with lots of products or content' ),
+				description: translate(
+					'Help your site visitors find answers instantly so they keep reading and buying.'
+				),
+				buttonLabel: translate( 'Get Search' ),
 			};
 		case OPTIONS_JETPACK_SECURITY:
 		case OPTIONS_JETPACK_SECURITY_MONTHLY:
