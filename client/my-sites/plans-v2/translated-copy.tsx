@@ -6,7 +6,12 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { OPTIONS_JETPACK_SECURITY, OPTIONS_JETPACK_SECURITY_MONTHLY } from './constants';
+import {
+	OPTIONS_JETPACK_BACKUP,
+	OPTIONS_JETPACK_BACKUP_MONTHLY,
+	OPTIONS_JETPACK_SECURITY,
+	OPTIONS_JETPACK_SECURITY_MONTHLY,
+} from './constants';
 import {
 	PLAN_JETPACK_COMPLETE,
 	PLAN_JETPACK_COMPLETE_MONTHLY,
@@ -18,7 +23,6 @@ import {
 import {
 	PRODUCT_JETPACK_ANTI_SPAM,
 	PRODUCT_JETPACK_ANTI_SPAM_MONTHLY,
-	PRODUCT_JETPACK_BACKUP,
 	PRODUCT_JETPACK_BACKUP_DAILY,
 	PRODUCT_JETPACK_BACKUP_DAILY_MONTHLY,
 	PRODUCT_JETPACK_BACKUP_REALTIME,
@@ -52,7 +56,8 @@ export function getSelectorProductCopy(
 				),
 				buttonLabel: translate( 'Get Anti-spam' ),
 			};
-		case PRODUCT_JETPACK_BACKUP:
+		case OPTIONS_JETPACK_BACKUP:
+		case OPTIONS_JETPACK_BACKUP_MONTHLY:
 			return {
 				displayName: translate( 'Jetpack Backup' ),
 				shortName: translate( 'Backup', {
