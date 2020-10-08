@@ -7,11 +7,16 @@ import React, { FunctionComponent } from 'react';
 /**
  * Internal dependencies
  */
-import { isEnabled } from 'config';
-import Gravatar from 'components/gravatar';
-import Gridicon from 'components/gridicon';
-import JetpackLogo from 'components/jetpack-logo';
-import SocialLogo from 'components/social-logo';
+import { isEnabled } from 'calypso/config';
+import Gravatar from 'calypso/components/gravatar';
+import Gridicon from 'calypso/components/gridicon';
+import JetpackLogo from 'calypso/components/jetpack-logo';
+import SocialLogo from 'calypso/components/social-logo';
+
+/**
+ * Type dependencies
+ */
+import { Activity } from 'calypso/state/activity-log/types';
 
 /**
  * Module constants
@@ -52,12 +57,7 @@ const MULTIPLE_ACTORS = (
 	</div>
 );
 
-interface Props {
-	actorAvatarUrl?: string;
-	actorName?: string;
-	actorRole?: string;
-	actorType?: string;
-}
+type Props = Partial< Activity >;
 
 const ActivityActor: FunctionComponent< Props > = ( {
 	actorAvatarUrl,
