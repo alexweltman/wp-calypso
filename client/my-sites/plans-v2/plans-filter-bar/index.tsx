@@ -3,17 +3,17 @@
  */
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { translate } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import classNames from 'classnames';
 
 /**
  * Internal dependencies
  */
-import SegmentedControl from 'components/segmented-control';
-import SelectDropdown from 'components/select-dropdown';
-import isJetpackCloud from 'lib/jetpack/is-jetpack-cloud';
-import { TERM_MONTHLY, TERM_ANNUALLY } from 'lib/plans/constants';
-import { masterbarIsVisible } from 'state/ui/selectors';
+import SegmentedControl from 'calypso/components/segmented-control';
+import SelectDropdown from 'calypso/components/select-dropdown';
+import isJetpackCloud from 'calypso/lib/jetpack/is-jetpack-cloud';
+import { TERM_MONTHLY, TERM_ANNUALLY } from 'calypso/lib/plans/constants';
+import { masterbarIsVisible } from 'calypso/state/ui/selectors';
 import { PRODUCT_TYPE_OPTIONS } from '../constants';
 import useDetectWindowBoundary from '../use-detect-window-boundary';
 
@@ -32,8 +32,8 @@ interface Props {
 	showProductTypes?: boolean;
 	duration?: Duration;
 	productType?: ProductType;
-	onDurationChange?: Function;
-	onProductTypeChange?: Function;
+	onDurationChange?: ( duration: Duration ) => void;
+	onProductTypeChange?: ( productType: ProductType ) => void;
 }
 
 const CALYPSO_MASTERBAR_HEIGHT = 47;
@@ -50,6 +50,8 @@ const PlansFilterBar = ( {
 	const isCloud = isJetpackCloud();
 	const masterbarSelector = isCloud ? '.jpcom-masterbar' : '.masterbar';
 	const masterbarDefaultHeight = isCloud ? CLOUD_MASTERBAR_HEIGHT : CALYPSO_MASTERBAR_HEIGHT;
+
+	const translate = useTranslate();
 
 	const barRef = useRef< HTMLDivElement | null >( null );
 	const isMasterbarVisible = useSelector( masterbarIsVisible );
@@ -91,6 +93,10 @@ const PlansFilterBar = ( {
 					</SegmentedControl.Item>
 				</SegmentedControl>
 			) }
+
+			<span className="plans-filter-bar__yearly-savings">
+				{ translate( 'You save 17% by paying yearly' ) }
+			</span>
 		</div>
 	);
 };
