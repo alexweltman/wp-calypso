@@ -9,6 +9,11 @@ import { Button } from '@automattic/components';
  */
 import { useTranslate } from 'i18n-calypso';
 
+/**
+ * Style dependencies
+ */
+import './style.scss';
+
 const JetpackFreeCardAlt = () => {
 	const translate = useTranslate();
 
@@ -22,22 +27,22 @@ const JetpackFreeCardAlt = () => {
 	];
 
 	return (
-		<>
+		<div className="jetpack-free-card-alt">
 			<div className="jetpack-free-card-alt__main">
 				<header>
 					<h2>{ translate( 'Jetpack Free' ) }</h2>
-					<div className="jetpack-free-card-alt__subheader">
+					<div className="jetpack-free-card-alt__subheadline">
 						{ translate( 'Included for free with all products' ) }
 					</div>
 				</header>
-				<Button>{ translate( 'Start for free' ) }</Button>
+				<Button primary>{ translate( 'Start for free' ) }</Button>
 			</div>
 			<div className="jetpack-free-card-alt__features">
 				{ freeFeatures.map( ( feature ) => (
 					<div className="jetpack-free-card-alt__feature">{ feature }</div>
 				) ) }
 			</div>
-		</>
+		</div>
 	);
 };
 
